@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:duetot/utility/my_style.dart';
+import 'package:duetot/scaffold/register.dart';
 
 class Authen extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _AuthenState extends State<Authen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      color: Colors.blueAccent[100],
+      color: MyStyle().mainColor,
       child: Text(
         'Sign In',
         style: TextStyle(
@@ -48,7 +50,14 @@ class _AuthenState extends State<Authen> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        print('object');
+        MaterialPageRoute materialPageRoute =
+            MaterialPageRoute(builder: (BuildContext buildContext) {
+          return Register();
+        });
+        Navigator.of(context).push(materialPageRoute);
+      },
     );
   }
 
@@ -96,12 +105,12 @@ class _AuthenState extends State<Authen> {
 
   Widget showAppName() {
     return Text(
-      'DueTOT',
+      '- DueTOT -',
       style: TextStyle(
         fontSize: 32.0,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
-        color: Colors.yellowAccent,
+        color: MyStyle().textColor,
         fontFamily: 'IndieFlower',
       ),
     );
@@ -111,12 +120,13 @@ class _AuthenState extends State<Authen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //resizeToAvoidBottomInset: false,
-      // backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.lightBlueAccent[100],
       body: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
           colors: <Color>[
             Colors.white,
+            Colors.blue[50],
             Colors.lightBlueAccent,
           ],
           radius: 1.5,
