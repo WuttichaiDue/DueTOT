@@ -20,9 +20,15 @@ class _RegisterState extends State<Register> {
           child: TextFormField(
             decoration: InputDecoration(
               labelText: 'Name :',
-              labelStyle: TextStyle(color: color),
+              labelStyle: TextStyle(
+                color: color,
+              ),
               helperText: 'Type Your Name in Blank',
-              helperStyle: TextStyle(color: color),
+              helperStyle: TextStyle(
+                color: color,
+                fontFamily: 'IndieFlower',
+                fontWeight: FontWeight.bold,
+              ),
               hintText: 'English Only',
               icon: Icon(
                 Icons.account_box,
@@ -46,9 +52,15 @@ class _RegisterState extends State<Register> {
           child: TextFormField(
             decoration: InputDecoration(
               labelText: 'Username :',
-              labelStyle: TextStyle(color: color),
+              labelStyle: TextStyle(
+                color: color,
+              ),
               helperText: 'Type Your Username in Blank',
-              helperStyle: TextStyle(color: color),
+              helperStyle: TextStyle(
+                color: color,
+                fontFamily: 'IndieFlower',
+                fontWeight: FontWeight.bold,
+              ),
               hintText: 'English Only',
               icon: Icon(
                 Icons.email,
