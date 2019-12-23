@@ -19,6 +19,12 @@ class _RegisterState extends State<Register> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
             decoration: InputDecoration(
+              //  enabledBorder: UnderlineInputBorder(      
+              //         borderSide: BorderSide(color:color),   
+              //         ),  
+              focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: color),
+                   ),
               labelText: 'Name :',
               labelStyle: TextStyle(
                 color: color,
@@ -30,12 +36,14 @@ class _RegisterState extends State<Register> {
                 fontWeight: FontWeight.bold,
               ),
               hintText: 'English Only',
+              
               icon: Icon(
                 Icons.account_box,
                 size: 36.0,
                 color: color,
               ),
             ),
+            
           ),
         ),
       ],
@@ -51,6 +59,9 @@ class _RegisterState extends State<Register> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
             decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: color),
+                   ),
               labelText: 'Username :',
               labelStyle: TextStyle(
                 color: color,
@@ -83,6 +94,9 @@ class _RegisterState extends State<Register> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
             decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: color),
+                   ),
               labelText: 'Password :',
               labelStyle: TextStyle(
                 color: color,
