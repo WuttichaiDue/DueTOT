@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:duetot/utility/normal_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:duetot/utility/my_style.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -12,6 +15,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   // ! Field
   File file;
+  String name, username, password;
+  final formKey = GlobalKey<FormState>();
   // ! Method
   Widget nameForm() {
     Color color = Colors.lightBlue;
@@ -21,6 +26,9 @@ class _RegisterState extends State<Register> {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
+            onSaved: (String string) {
+              name = string.trim();
+            },
             decoration: InputDecoration(
               //  enabledBorder: UnderlineInputBorder(
               //         borderSide: BorderSide(color:color),
@@ -60,6 +68,9 @@ class _RegisterState extends State<Register> {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
+            onSaved: (String string) {
+              username = string.trim();
+            },
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: color),
@@ -95,6 +106,9 @@ class _RegisterState extends State<Register> {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
+            onSaved: (String string) {
+              password = string.trim();
+            },
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: color),
@@ -196,9 +210,45 @@ class _RegisterState extends State<Register> {
         Icons.cloud_upload,
         size: 36.0,
       ),
-      onPressed: () {},
+      onPressed: () {
+        formKey.currentState.save();
+        if (file == null) {
+          normalDialog(context, 'Non Choose Image',
+              '" Please Click Camera or Gallery for Choose Image. "');
+        } else if (name.isEmpty) {
+          normalDialog(context, 'Name Blank!', '" Please Type Your Name. "');
+        } else if (username.isEmpty) {
+          normalDialog(
+              context, 'Username Blank!', '" Please Type Your Username. "');
+        } else if (password.isEmpty) {
+          normalDialog(
+              context, 'Password Blank!', '" Please Type Your Password. "');
+        } else if (password.length < 6) {
+          normalDialog(context, 'Password Weak!',
+              '" Please Type Your Password more 6 Charactor. "');
+        } else {
+          uploadPictureToServer();
+        }
+      },
       tooltip: 'Upload tp Server',
     );
+  }
+
+  Future<void> uploadPictureToServer() async {
+    Random random = Random();
+    int i = random.nextInt(12345);
+    String namePicture = 'avartar$i.jpg';
+    print(namePicture);
+
+    String url = 'https://www.androidthai.in.th/tot/saveFileDue.php';
+
+    try {
+      Map<String, dynamic> map = Map();
+      map['file'] = UploadFileInfo(file, namePicture);
+      FormData formData = FormData.from(map);
+      Response response = await Dio().post(url, data: formData);
+      print(response);
+    } catch (e) {}
   }
 
   @override
@@ -218,14 +268,17 @@ class _RegisterState extends State<Register> {
           registerButton(),
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          showAvatar(),
-          showButton(),
-          nameForm(),
-          userForm(),
-          passwordForm(),
-        ],
+      body: Form(
+        key: formKey,
+        child: ListView(
+          children: <Widget>[
+            showAvatar(),
+            showButton(),
+            nameForm(),
+            userForm(),
+            passwordForm(),
+          ],
+        ),
       ),
     );
   }
