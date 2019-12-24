@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:duetot/utility/my_style.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -8,7 +11,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   // ! Field
-
+  File file;
   // ! Method
   Widget nameForm() {
     Color color = Colors.lightBlue;
@@ -19,12 +22,12 @@ class _RegisterState extends State<Register> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: TextFormField(
             decoration: InputDecoration(
-              //  enabledBorder: UnderlineInputBorder(      
-              //         borderSide: BorderSide(color:color),   
-              //         ),  
+              //  enabledBorder: UnderlineInputBorder(
+              //         borderSide: BorderSide(color:color),
+              //         ),
               focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: color),
-                   ),
+                borderSide: BorderSide(color: color),
+              ),
               labelText: 'Name :',
               labelStyle: TextStyle(
                 color: color,
@@ -36,14 +39,13 @@ class _RegisterState extends State<Register> {
                 fontWeight: FontWeight.bold,
               ),
               hintText: 'English Only',
-              
+
               icon: Icon(
                 Icons.account_box,
                 size: 36.0,
                 color: color,
               ),
             ),
-            
           ),
         ),
       ],
@@ -60,8 +62,8 @@ class _RegisterState extends State<Register> {
           child: TextFormField(
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: color),
-                   ),
+                borderSide: BorderSide(color: color),
+              ),
               labelText: 'Username :',
               labelStyle: TextStyle(
                 color: color,
@@ -95,8 +97,8 @@ class _RegisterState extends State<Register> {
           child: TextFormField(
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: color),
-                   ),
+                borderSide: BorderSide(color: color),
+              ),
               labelText: 'Password :',
               labelStyle: TextStyle(
                 color: color,
@@ -131,8 +133,21 @@ class _RegisterState extends State<Register> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        cameraAndGalleryThread(ImageSource.camera);
+      },
     );
+  }
+
+  Future<void> cameraAndGalleryThread(ImageSource imageSource) async {
+    var object = await ImagePicker.pickImage(
+      source: imageSource,
+      maxHeight: 800.0,
+      maxWidth: 600.0,
+    );
+    setState(() {
+      file = object;
+    });
   }
 
   Widget galleryButton() {
@@ -146,7 +161,9 @@ class _RegisterState extends State<Register> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        cameraAndGalleryThread(ImageSource.gallery);
+      },
     );
   }
 
@@ -164,10 +181,12 @@ class _RegisterState extends State<Register> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: MediaQuery.of(context).size.width * 0.9,
-      child: Image.asset(
-        'images/avatar.png',
-        fit: BoxFit.contain,
-      ),
+      child: file == null
+          ? Image.asset(
+              'images/avatar.png',
+              fit: BoxFit.contain,
+            )
+          : Image.file(file),
     );
   }
 
