@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:duetot/models/user_model.dart';
+import 'package:duetot/scaffold/my_service.dart';
+import 'package:duetot/utility/normal_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:duetot/utility/my_style.dart';
 import 'package:duetot/scaffold/register.dart';
@@ -9,7 +15,8 @@ class Authen extends StatefulWidget {
 
 class _AuthenState extends State<Authen> {
   //!Field
-
+  String username, password;
+  final formKey = GlobalKey<FormState>();
   //!Method
   Widget mySizeBox() {
     return SizedBox(
@@ -33,8 +40,44 @@ class _AuthenState extends State<Authen> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        formKey.currentState.save();
+        if (username.isEmpty || password.isEmpty) {
+          normalDialog(
+              context, 'Have Space', '" Please Fill All Every Blank. "');
+        } else {
+          checkAuthen();
+        }
+      },
     );
+  }
+
+  Future<void> checkAuthen() async {
+    String url =
+        'https://www.androidthai.in.th/tot/getUserWhereUserDue.php?isAdd=true&User=$username';
+    Response response = await Dio().get(url);
+    var result = json.decode(response.data);
+    print(result);
+    if (result.toString() == 'null') {
+      normalDialog(context, 'User False', '" No $username in my Database. "');
+    } else {
+      for (var item in result) {
+        UserModel userModel = UserModel.fromJson(item);
+        if (password == userModel.password) {
+          MaterialPageRoute materialPageRoute =
+              MaterialPageRoute(builder: (BuildContext buildContext) {
+            return MyService();
+          });
+          Navigator.of(context).pushAndRemoveUntil(materialPageRoute,
+              (Route<dynamic> route) {
+            return false;
+          });
+        } else {
+          normalDialog(context, 'Password False',
+              '" Please Try Agains Password False. "');
+        }
+      }
+    }
   }
 
   Widget signUpButton() {
@@ -76,8 +119,19 @@ class _AuthenState extends State<Authen> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       child: TextFormField(
+        onSaved: (String string) {
+          username = string.trim();
+        },
         decoration: InputDecoration(
-          labelText: 'Usermane :',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: MyStyle().mainColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.lightGreenAccent[400]),
+          ),
+          hintText: 'Usermane :',
         ),
       ),
     );
@@ -87,9 +141,20 @@ class _AuthenState extends State<Authen> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       child: TextFormField(
+        onSaved: (String string) {
+          password = string.trim();
+        },
         obscureText: true,
         decoration: InputDecoration(
-          labelText: 'Password :',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: MyStyle().mainColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.lightGreenAccent[400]),
+          ),
+          hintText: 'Password :',
         ),
       ),
     );
@@ -97,8 +162,8 @@ class _AuthenState extends State<Authen> {
 
   Widget showLogo() {
     return Container(
-      width: 120.0,
-      height: 120.0,
+      width: 140.0,
+      height: 140.0,
       child: Image.asset('images/logo.png'),
     );
   }
@@ -120,7 +185,7 @@ class _AuthenState extends State<Authen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.lightBlueAccent[100],
+      backgroundColor: Colors.lightBlue[50],
       body: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
@@ -133,17 +198,21 @@ class _AuthenState extends State<Authen> {
         )),
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                showLogo(),
-                mySizeBox(),
-                showAppName(),
-                userForm(),
-                passwordForm(),
-                mySizeBox(),
-                showButton(),
-              ],
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  showLogo(),
+                  mySizeBox(),
+                  showAppName(),
+                  userForm(),
+                  mySizeBox(),
+                  passwordForm(),
+                  mySizeBox(),
+                  showButton(),
+                ],
+              ),
             ),
           ),
         ),

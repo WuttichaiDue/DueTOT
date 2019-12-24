@@ -1,3 +1,4 @@
+
 import 'dart:io';
 import 'dart:math';
 
@@ -15,7 +16,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   // ! Field
   File file;
-  String name, username, password;
+  String name, username, password, avatar;
   final formKey = GlobalKey<FormState>();
   // ! Method
   Widget nameForm() {
@@ -238,8 +239,7 @@ class _RegisterState extends State<Register> {
     Random random = Random();
     int i = random.nextInt(12345);
     String namePicture = 'avartar$i.jpg';
-    print(namePicture);
-
+    avatar = 'https://www.androidthai.in.th/tot/Due/$namePicture';
     String url = 'https://www.androidthai.in.th/tot/saveFileDue.php';
 
     try {
@@ -247,8 +247,28 @@ class _RegisterState extends State<Register> {
       map['file'] = UploadFileInfo(file, namePicture);
       FormData formData = FormData.from(map);
       Response response = await Dio().post(url, data: formData);
-      print(response);
+      var result = response.data;
+      String string = result['message'];
+
+      if (string == "File uploaded successfully") {
+        insertDatatoMysql();
+      } else {
+        print('cannot Upload');
+      }
     } catch (e) {}
+  }
+
+  Future<void> insertDatatoMysql() async {
+    String url =
+        'https://www.androidthai.in.th/tot/addDataDue.php?isAdd=true&Name=$name&User=$username&Password=$password&Avata=$avatar';
+    Response response = await Dio().get(url);
+    var result = response.data;
+    print(result);
+    if (result.toString() == 'true') {
+      Navigator.of(context).pop();
+    } else {
+      normalDialog(context, 'Cannot Register', 'Please Try Again');
+    }
   }
 
   @override
