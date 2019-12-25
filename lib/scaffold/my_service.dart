@@ -28,14 +28,17 @@ class _MyServiceState extends State<MyService> {
 
   Widget menuShowList() {
     return ListTile(
-      leading: Icon(Icons.filter_1),
+      leading: Icon(
+        Icons.filter_1,
+        color: Colors.purpleAccent,
+      ),
       title: Text(
         'Show List Product',
-        style: MyStyle().nomalTextStyle,
+        style: MyTextStyle().nomalTextStyle7,
       ),
       subtitle: Text(
         ' : Expand or Description Menu Show List Product',
-        style: MyStyle().subtitleTextStyle,
+        style: MyTextStyle().subtitleTextStyle7,
       ),
       onTap: () {
         setState(() {
@@ -48,14 +51,17 @@ class _MyServiceState extends State<MyService> {
 
   Widget menuShowInfo() {
     return ListTile(
-      leading: Icon(Icons.filter_2),
+      leading: Icon(
+        Icons.filter_2,
+        color: Colors.lightBlue,
+      ),
       title: Text(
         'Show Infomation',
-        style: MyStyle().nomalTextStyle,
+        style: MyTextStyle().nomalTextStyle6,
       ),
       subtitle: Text(
         ' : Expand or Description Menu Infomation',
-        style: MyStyle().subtitleTextStyle,
+        style: MyTextStyle().subtitleTextStyle6,
       ),
       onTap: () {
         setState(() {
@@ -68,14 +74,17 @@ class _MyServiceState extends State<MyService> {
 
   Widget menuShowQrCode() {
     return ListTile(
-      leading: Icon(Icons.filter_3),
+      leading: Icon(
+        Icons.filter_3,
+        color: Colors.lightBlueAccent,
+      ),
       title: Text(
         'Show QrCode',
-        style: MyStyle().nomalTextStyle,
+        style: MyTextStyle().nomalTextStyle5,
       ),
       subtitle: Text(
         ' : Expand or Description Menu QrCode and BarCode',
-        style: MyStyle().subtitleTextStyle,
+        style: MyTextStyle().subtitleTextStyle5,
       ),
     );
   }
@@ -90,17 +99,16 @@ class _MyServiceState extends State<MyService> {
   Widget showAvatarDrawer() {
     return Container(
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.black),
-          gradient: RadialGradient(
-          colors: <Color>[
-            Colors.white,
-            Colors.blue[50],
-            Colors.lightBlueAccent,
-          ],
-          radius: 1.5,
-        )),
-        
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black),
+            gradient: RadialGradient(
+              colors: <Color>[
+                Colors.white,
+                Colors.blue[50],
+                Colors.lightBlueAccent,
+              ],
+              radius: 1.5,
+            )),
         width: 100.0,
         height: 100.0,
         child: ClipOval(
@@ -137,11 +145,11 @@ class _MyServiceState extends State<MyService> {
           showHeadDrawer(),
           menuShowList(),
           Divider(
-            color: Colors.lightBlueAccent,
+            color: Colors.purpleAccent[700],
           ),
           menuShowInfo(),
           Divider(
-            color: Colors.lightBlueAccent,
+            color: Colors.lightBlue[700],
           ),
           menuShowQrCode(),
           Divider(

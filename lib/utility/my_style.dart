@@ -40,6 +40,13 @@ class MyStyle {
     fontSize: 20.0,
     color: Colors.yellowAccent[700],
   );
+    TextStyle appbarStyle = TextStyle(
+            fontFamily: 'IndieFlower',
+            fontWeight: FontWeight.bold,
+            fontSize: 32.0,
+          );
+
+ 
   MyStyle();
 }
 
@@ -57,7 +64,7 @@ class MyTextStyle {
     fontSize: 12.0,
     color: Colors.purpleAccent[400],
   );
-    TextStyle nomalTextStyle6 = TextStyle(
+  TextStyle nomalTextStyle6 = TextStyle(
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
     fontSize: 16.0,
@@ -70,13 +77,13 @@ class MyTextStyle {
     fontSize: 12.0,
     color: Colors.lightBlue[700],
   );
-     TextStyle nomalTextStyle5 = TextStyle(
+  TextStyle nomalTextStyle5 = TextStyle(
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
     fontSize: 16.0,
     color: Colors.lightBlueAccent[700],
   );
-TextStyle subtitleTextStyle5 = TextStyle(
+  TextStyle subtitleTextStyle5 = TextStyle(
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
     fontSize: 12.0,
@@ -88,12 +95,47 @@ TextStyle subtitleTextStyle5 = TextStyle(
     fontSize: 16.0,
     color: Colors.lightGreenAccent[700],
   );
-TextStyle subtitleTextStyle4 = TextStyle(
+  TextStyle subtitleTextStyle4 = TextStyle(
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
     fontSize: 12.0,
     color: Colors.lightGreenAccent[400],
   );
- 
+  TextStyle nomalTextStyle3 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    color: Colors.yellowAccent[700],
+  );
+  TextStyle subtitleTextStyle3 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 12.0,
+    color: Colors.yellowAccent[400],
+  );
+  TextStyle nomalTextStyle2 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    color: Colors.orangeAccent[700],
+  );
+  TextStyle subtitleTextStyle2 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 12.0,
+    color: Colors.orangeAccent[400],
+  );
+  TextStyle nomalTextStyle1 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    color: Colors.redAccent[700],
+  );
+  TextStyle subtitleTextStyle1 = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 12.0,
+    color: Colors.redAccent[400],
+  );
   MyTextStyle();
 }
