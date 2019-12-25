@@ -46,13 +46,23 @@ class _AuthenState extends State<Authen> {
           normalDialog(
               context, 'Have Space', '" Please Fill All Every Blank. "');
         } else {
-          checkAuthen();
+          checkAuthenGetType();
+          //checkAuthenPostType();
         }
       },
     );
   }
 
-  Future<void> checkAuthen() async {
+  Future<void> checkAuthenPostType() async {
+    String url = 'http://iservice.totinnovate.com/WebAPI/LoginPost';
+    Map<String, dynamic> map = Map();
+    map['UserName'] = username;
+    map['Password'] = password;
+    Response response = await Dio().post(url, data: map);
+    print(response);
+  }
+
+  Future<void> checkAuthenGetType() async {
     String url =
         'https://www.androidthai.in.th/tot/getUserWhereUserDue.php?isAdd=true&User=$username';
     Response response = await Dio().get(url);
@@ -66,7 +76,9 @@ class _AuthenState extends State<Authen> {
         if (password == userModel.password) {
           MaterialPageRoute materialPageRoute =
               MaterialPageRoute(builder: (BuildContext buildContext) {
-            return MyService();
+            return MyService(
+              userModel: userModel,
+            );
           });
           Navigator.of(context).pushAndRemoveUntil(materialPageRoute,
               (Route<dynamic> route) {
