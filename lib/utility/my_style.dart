@@ -108,6 +108,30 @@ class MyStyle {
           color: Colors.redAccent[100]),
     ],
   );
+   TextStyle serviceTitletextStyle = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 24.0,
+    color: Colors.yellowAccent,
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-0.5, -0.5),
+          color: Colors.black),
+      Shadow(
+          // bottomRight
+          offset: Offset(0.5, -0.5),
+          color: Colors.black),
+      Shadow(
+          // topRight
+          offset: Offset(0.5, 0.5),
+          color: Colors.black),
+      Shadow(
+          // topLeft
+          offset: Offset(-0.5, 0.5),
+          color: Colors.black),
+    ],
+  );
   BoxDecoration containerDecoration = BoxDecoration(
         gradient: LinearGradient(
           // Where the linear gradient begins and ends
@@ -117,7 +141,7 @@ class MyStyle {
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
             // Colors are easy thanks to Flutter's Colors class.
-            Colors.lightBlueAccent[100],
+            Colors.lightBlue[50],
             Colors.white,
             Colors.green[50],
             Colors.yellow[100],
