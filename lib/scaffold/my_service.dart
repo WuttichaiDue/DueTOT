@@ -17,13 +17,15 @@ class MyService extends StatefulWidget {
 class _MyServiceState extends State<MyService> {
   // ! Field
   UserModel myUserModel;
-  Widget currentWidget = ShowListProduct();
+  Widget currentWidget;
   // ! Method
   @override
   void initState() {
     super.initState();
     myUserModel = widget.userModel;
-    print('${myUserModel.name}');
+    currentWidget = ShowListProduct(
+      userModel: myUserModel,
+    );
   }
 
   Widget menuShowList() {
@@ -168,11 +170,7 @@ class _MyServiceState extends State<MyService> {
         backgroundColor: MyStyle().mainColor,
         title: Text(
           'MyService',
-          style: TextStyle(
-            fontFamily: 'IndieFlower',
-            fontWeight: FontWeight.bold,
-            fontSize: 32.0,
-          ),
+          style: MyStyle().appbarStyle,
         ),
       ),
       body: currentWidget,

@@ -19,8 +19,27 @@ class MyStyle {
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
     fontSize: 24.0,
-    color: Colors.lightGreenAccent[700],
+    color: Colors.white,
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-1, -1),
+          color: Colors.purpleAccent),
+      Shadow(
+          // bottomRight
+          offset: Offset(1, -1),
+          color: Colors.lightBlueAccent),
+      Shadow(
+          // topRight
+          offset: Offset(1, 1),
+          color: Colors.lightGreenAccent),
+      Shadow(
+          // topLeft
+          offset: Offset(-1, 1),
+          color: Colors.redAccent[100]),
+    ],
   );
+
   TextStyle nomalTextStyle = TextStyle(
     fontFamily: 'IndieFlower',
     fontWeight: FontWeight.bold,
@@ -40,13 +59,72 @@ class MyStyle {
     fontSize: 20.0,
     color: Colors.yellowAccent[700],
   );
-    TextStyle appbarStyle = TextStyle(
-            fontFamily: 'IndieFlower',
-            fontWeight: FontWeight.bold,
-            fontSize: 32.0,
-          );
+  TextStyle appbarStyle = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 32.0,
+    color: Colors.white,
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-1, -1),
+          color: Colors.purpleAccent),
+      Shadow(
+          // bottomRight
+          offset: Offset(1, -1),
+          color: Colors.lightBlueAccent),
+      Shadow(
+          // topRight
+          offset: Offset(1, 1),
+          color: Colors.lightGreenAccent),
+      Shadow(
+          // topLeft
+          offset: Offset(-1, 1),
+          color: Colors.redAccent[100]),
+    ],
+  );
 
- 
+  TextStyle textStyle = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    color: Colors.white,
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-0.5, -0.5),
+          color: Colors.purpleAccent),
+      Shadow(
+          // bottomRight
+          offset: Offset(0.5, -0.5),
+          color: Colors.lightBlueAccent),
+      Shadow(
+          // topRight
+          offset: Offset(0.5, 0.5),
+          color: Colors.lightGreenAccent),
+      Shadow(
+          // topLeft
+          offset: Offset(-0.5, 0.5),
+          color: Colors.redAccent[100]),
+    ],
+  );
+  BoxDecoration containerDecoration = BoxDecoration(
+        gradient: LinearGradient(
+          // Where the linear gradient begins and ends
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          // Add one stop for each color. Stops should increase from 0 to 1
+          stops: [0.1, 0.5, 0.7, 0.9],
+          colors: [
+            // Colors are easy thanks to Flutter's Colors class.
+            Colors.lightBlueAccent[100],
+            Colors.white,
+            Colors.green[50],
+            Colors.yellow[100],
+          ],
+        ),
+      );
+
   MyStyle();
 }
 

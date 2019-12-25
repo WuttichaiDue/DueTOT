@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:math';
 
@@ -278,11 +277,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: MyStyle().mainColor,
         title: Text(
           ' Register . . . ',
-          style: TextStyle(
-            fontFamily: 'IndieFlower',
-            fontWeight: FontWeight.bold,
-            fontSize: 32.0,
-          ),
+          style: MyStyle().appbarStyle,
         ),
         actions: <Widget>[
           registerButton(),
