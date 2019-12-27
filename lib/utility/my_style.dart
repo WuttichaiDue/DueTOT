@@ -8,6 +8,24 @@ class MyStyle {
     fontWeight: FontWeight.bold,
     fontSize: 22.0,
     color: Colors.red,
+     shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-0.5, -0.5),
+          color: Colors.deepOrangeAccent),
+      Shadow(
+          // bottomRight
+          offset: Offset(0.5, -0.5),
+          color: Colors.deepOrangeAccent),
+      Shadow(
+          // topRight
+          offset: Offset(0.5, 0.5),
+          color: Colors.deepOrangeAccent),
+      Shadow(
+          // topLeft
+          offset: Offset(-0.5, 0.5),
+          color: Colors.deepOrangeAccent),
+    ],
   );
   TextStyle nomaldialogStyle = TextStyle(
     fontFamily: 'IndieFlower',
@@ -129,6 +147,54 @@ class MyStyle {
       Shadow(
           // topLeft
           offset: Offset(-0.5, 0.5),
+          color: Colors.black),
+    ],
+  );
+   TextStyle smalltextStyle = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    color: Colors.yellowAccent[100],
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-0.5, -0.5),
+          color: Colors.black),
+      Shadow(
+          // bottomRight
+          offset: Offset(0.5, -0.5),
+          color: Colors.black),
+      Shadow(
+          // topRight
+          offset: Offset(0.5, 0.5),
+          color: Colors.black),
+      Shadow(
+          // topLeft
+          offset: Offset(-0.5, 0.5),
+          color: Colors.black),
+    ],
+  );
+  TextStyle appTitletextStyle = TextStyle(
+    fontFamily: 'IndieFlower',
+    fontWeight: FontWeight.bold,
+    fontSize: 32.0,
+    color: Colors.yellowAccent,
+    shadows: [
+      Shadow(
+          // bottomLeft
+          offset: Offset(-1, -0.5),
+          color: Colors.black),
+      Shadow(
+          // bottomRight
+          offset: Offset(1, -0.5),
+          color: Colors.black),
+      Shadow(
+          // topRight
+          offset: Offset(1, 0.5),
+          color: Colors.black),
+      Shadow(
+          // topLeft
+          offset: Offset(-1, 0.5),
           color: Colors.black),
     ],
   );

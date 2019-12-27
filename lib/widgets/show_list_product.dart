@@ -31,7 +31,7 @@ class _ShowListProductState extends State<ShowListProduct> {
     String url = 'https://www.androidthai.in.th/tot/getAllProductDue.php';
     Response response = await Dio().get(url);
     var result = json.decode(response.data);
-    print(result);
+    // print(result);
     for (var item in result) {
       ProductModel productModel = ProductModel.fromJson(item);
       setState(() {
@@ -42,17 +42,22 @@ class _ShowListProductState extends State<ShowListProduct> {
 
   Widget showPicture(int index) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.5,
-      height: MediaQuery.of(context).size.width * 0.4,
+      margin: EdgeInsets.only(left: 3.0),
+      width: MediaQuery.of(context).size.width * 0.48,
+      height: MediaQuery.of(context).size.width * 0.38,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(productModels[index].path),
-        )
-      ),
-      child: CircleAvatar(
-        backgroundImage: NetworkImage(productModels[index].path),
-        backgroundColor: Colors.lightGreenAccent[100],
-      ),
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(30),
+          image: DecorationImage(
+            image: NetworkImage(
+              productModels[index].path,
+            ),
+            fit: BoxFit.cover,
+          )),
+      // child: CircleAvatar(
+      //   backgroundImage: NetworkImage(productModels[index].path),
+      //   backgroundColor: Colors.lightGreenAccent[100],
+      // ),
     );
   }
 
@@ -75,7 +80,7 @@ class _ShowListProductState extends State<ShowListProduct> {
   Widget showText(int index) {
     return Container(
       padding: EdgeInsets.all(16.0),
-      width: MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 0.4,
       height: MediaQuery.of(context).size.width * 0.4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,12 +96,33 @@ class _ShowListProductState extends State<ShowListProduct> {
     return ListView.builder(
       itemCount: productModels.length,
       itemBuilder: (BuildContext buildContext, int index) {
-        return Row(
-          children: <Widget>[
-            showPicture(index),
-            showText(index),
-            
-          ],
+        return Container(
+          margin: EdgeInsets.all(1.0),
+          decoration: BoxDecoration(
+            // gradient: LinearGradient(
+            //   // Where the linear gradient begins and ends
+            //   begin: Alignment.topRight,
+            //   end: Alignment.bottomLeft,
+            //   // Add one stop for each color. Stops should increase from 0 to 1
+            //   stops: [0.02, 0.2, 0.7, 0.99],
+            //   colors: [
+            //     // Colors are easy thanks to Flutter's Colors class.
+            //     Colors.purple[50],
+            //     Colors.blue[50],
+            //     Colors.yellow[100],
+            //     Colors.pink[300],
+            //   ],
+            // ),
+            border: Border.all(color: Colors.black, width: 2.0),
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              showPicture(index),
+              showText(index),
+            ],
+          ),
         );
       },
     );

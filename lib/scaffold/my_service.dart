@@ -1,8 +1,16 @@
+import 'dart:io';
+
 import 'package:duetot/models/user_model.dart';
+import 'package:duetot/scaffold/authen.dart';
+import 'package:duetot/scaffold/webview_youtube.dart';
+import 'package:duetot/scaffold/webview_google.dart';
 import 'package:duetot/utility/my_style.dart';
 import 'package:duetot/widgets/show_infomation.dart';
 import 'package:duetot/widgets/show_list_product.dart';
+import 'package:duetot/widgets/show_video.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibration/vibration.dart';
 
 class MyService extends StatefulWidget {
   final UserModel userModel;
@@ -91,6 +99,136 @@ class _MyServiceState extends State<MyService> {
     );
   }
 
+  Widget menuVibration() {
+    return ListTile(
+      leading: Icon(
+        Icons.vibration,
+        color: Colors.lightGreen,
+      ),
+      title: Text(
+        'Vibration',
+        style: MyTextStyle().nomalTextStyle4,
+      ),
+      subtitle: Text(
+        ' : Test ... Vibration ',
+        style: MyTextStyle().subtitleTextStyle4,
+      ),
+      onTap: () {
+        setState(() {
+          Vibration.vibrate(duration: 1000);
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
+  Widget menuVideo() {
+    return ListTile(
+      leading: Icon(
+        Icons.videocam,
+        color: Colors.yellow[700],
+      ),
+      title: Text(
+        'List Video',
+        style: MyTextStyle().nomalTextStyle3,
+      ),
+      subtitle: Text(
+        ' : Expand ListVideo',
+        style: MyTextStyle().subtitleTextStyle3,
+      ),
+      onTap: () {
+        setState(() {
+          currentWidget = ListVideo();
+          Navigator.of(context).pop();
+        });
+      },
+    );
+  }
+
+  Widget menuGoogle() {
+    return ListTile(
+      leading: Icon(
+        Icons.search,
+        color: Colors.deepOrangeAccent,
+      ),
+      title: Text(
+        'Google',
+        style: MyTextStyle().nomalTextStyle2,
+      ),
+      subtitle: Text(
+        ' : Web Google ',
+        style: MyTextStyle().subtitleTextStyle2,
+      ),
+      onTap: () {
+        setState(() {
+          MaterialPageRoute materialPageRoute = MaterialPageRoute(
+              builder: (BuildContext buildContext) => WebViewGoogle());
+
+          Navigator.of(context).push(materialPageRoute);
+        });
+      },
+    );
+  }
+
+  Widget menuYoutube() {
+    return ListTile(
+      leading: Icon(
+        Icons.ondemand_video,
+        color: Colors.redAccent,
+      ),
+      title: Text(
+        'YouTube',
+        style: MyTextStyle().nomalTextStyle1,
+      ),
+      subtitle: Text(
+        ' : Web View Youtube ',
+        style: MyTextStyle().subtitleTextStyle1,
+      ),
+      onTap: () {
+        setState(() {
+          MaterialPageRoute materialPageRoute = MaterialPageRoute(
+              builder: (BuildContext buildContext) => WebViewYoutube());
+
+          Navigator.of(context).push(materialPageRoute);
+        });
+      },
+    );
+  }
+
+  Widget menuSingOut() {
+    return ListTile(
+      leading: Icon(
+        Icons.exit_to_app,
+        color: Colors.purpleAccent,
+      ),
+      title: Text(
+        'Sing Out',
+        style: MyTextStyle().nomalTextStyle7,
+      ),
+      subtitle: Text(
+        ' : Sing Out ',
+        style: MyTextStyle().subtitleTextStyle7,
+      ),
+      onTap: () {
+        signOutProcess();
+      },
+    );
+  }
+
+  Future<void> signOutProcess() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    // exit(0); //!Exit App
+    MaterialPageRoute materialPageRoute =
+        MaterialPageRoute(builder: (BuildContext buildcontext) {
+      return Authen();
+    });
+    Navigator.of(context).pushAndRemoveUntil(materialPageRoute,
+        (Route<dynamic> route) {
+      return false;
+    });
+  }
+
   Widget showNameLogin() {
     return Text(
       'Login by ${myUserModel.name}',
@@ -156,6 +294,26 @@ class _MyServiceState extends State<MyService> {
           menuShowQrCode(),
           Divider(
             color: Colors.lightBlueAccent,
+          ),
+          menuVibration(),
+          Divider(
+            color: Colors.lightGreenAccent,
+          ),
+          menuVideo(),
+          Divider(
+            color: Colors.yellowAccent,
+          ),
+          menuGoogle(),
+          Divider(
+            color: Colors.orangeAccent,
+          ),
+          menuYoutube(),
+          Divider(
+            color: Colors.redAccent,
+          ),
+          menuSingOut(),
+          Divider(
+            color: Colors.purpleAccent[700],
           ),
         ],
       ),
