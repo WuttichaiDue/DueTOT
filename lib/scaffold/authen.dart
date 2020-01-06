@@ -23,9 +23,10 @@ class _AuthenState extends State<Authen> {
   bool remember = false;
   //!Method
   void initState() {
-    super.initState();  
+    super.initState();
     findToken();
-    readSharedPreferrance(); 
+    readSharedPreferrance();
+  }
 
   Future<void> findToken() async {
     FirebaseMessaging firebaseMessaging = FirebaseMessaging();

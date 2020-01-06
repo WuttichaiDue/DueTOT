@@ -9,6 +9,7 @@ class WebViewGoogle extends StatefulWidget {
 
 class _WebViewGoogleState extends State<WebViewGoogle> {
   Widget showWebView() {
+    
     String url = 'https://www.google.co.th/?hl=th';
     return WebviewScaffold(
       url: url,
